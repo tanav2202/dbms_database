@@ -1,7 +1,5 @@
+--- Postgresql dump for DBMS Project
 
---
--- Name: managers; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.managers (
     mgr_id character varying(10) NOT NULL,
@@ -13,9 +11,6 @@ CREATE TABLE public.managers (
 
 
 
---
--- Name: match_referees; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.match_referees (
     match_num character varying(10) NOT NULL,
@@ -28,9 +23,6 @@ CREATE TABLE public.match_referees (
 
 
 
---
--- Name: matches; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.matches (
     match_num character varying(10) NOT NULL,
@@ -42,9 +34,7 @@ CREATE TABLE public.matches (
 );
 
 
---
--- Name: players; Type: TABLE; Schema: public; Owner: postgres
---
+
 
 CREATE TABLE public.players (
     player_id character varying(10) NOT NULL,
@@ -57,10 +47,6 @@ CREATE TABLE public.players (
 
 
 
---
--- Name: referees; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.referees (
     referee_id character varying(10) NOT NULL,
     name character varying(80) NOT NULL,
@@ -69,9 +55,6 @@ CREATE TABLE public.referees (
 
 
 
---
--- Name: teams; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.teams (
     team_id character varying(10) NOT NULL,
@@ -84,9 +67,6 @@ CREATE TABLE public.teams (
 
 
 
---
--- Data for Name: managers; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 COPY public.managers (mgr_id, name, dob, team_id, since) FROM stdin;
 M0001	Jacob	1990-08-23	T0001	2020-06-22
@@ -98,9 +78,6 @@ M0006	Philip	1989-10-04	T0006	2021-05-16
 \.
 
 
---
--- Data for Name: match_referees; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 COPY public.match_referees (match_num, referee, assistant_referee_1, assistant_referee_2, fourth_referee) FROM stdin;
 M0001	R0001	R0002	R0003	R0004
@@ -122,9 +99,7 @@ M0015	R0001	R0002	R0003	R0004
 \.
 
 
---
--- Data for Name: matches; Type: TABLE DATA; Schema: public; Owner: postgres
---
+
 
 COPY public.matches (match_num, match_date, host_team_id, guest_team_id, host_team_score, guest_team_score) FROM stdin;
 M0001	2020-05-06	T0001	T0006	5	4
@@ -146,9 +121,6 @@ M0016	2020-05-26	T0001	T0002	1	2
 \.
 
 
---
--- Data for Name: players; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 COPY public.players (player_id, name, dob, jersey_no, team_id) FROM stdin;
 P1001	Rudra	2003-05-01	99	T0001
@@ -254,41 +226,28 @@ T0006	Arawali	Hyderabad	J K Park	Pink	Yellow
 \.
 
 
---
--- Name: managers managers_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public.managers
     ADD CONSTRAINT managers_pk PRIMARY KEY (mgr_id);
 
 
---
--- Name: match_referees match_referees_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.match_referees
     ADD CONSTRAINT match_referees_pkey PRIMARY KEY (match_num);
 
 
---
--- Name: matches matches_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+
 
 ALTER TABLE ONLY public.matches
     ADD CONSTRAINT matches_pk PRIMARY KEY (match_num);
 
 
---
--- Name: players players_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+
 
 ALTER TABLE ONLY public.players
     ADD CONSTRAINT players_pk PRIMARY KEY (player_id);
 
 
---
--- Name: referees referees_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+
 
 ALTER TABLE ONLY public.referees
     ADD CONSTRAINT referees_pk PRIMARY KEY (referee_id);
@@ -302,33 +261,21 @@ ALTER TABLE ONLY public.teams
     ADD CONSTRAINT teams_pk PRIMARY KEY (team_id);
 
 
---
--- Name: managers managers_fk3; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public.managers
     ADD CONSTRAINT managers_fk3 FOREIGN KEY (team_id) REFERENCES public.teams(team_id);
 
 
---
--- Name: match_referees match_referees_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.match_referees
     ADD CONSTRAINT match_referees_fk0 FOREIGN KEY (match_num) REFERENCES public.matches(match_num);
 
 
---
--- Name: match_referees match_referees_fk2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
+
 
 ALTER TABLE ONLY public.match_referees
     ADD CONSTRAINT match_referees_fk2 FOREIGN KEY (referee) REFERENCES public.referees(referee_id);
 
 
---
--- Name: match_referees match_referees_fk3; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public.match_referees
     ADD CONSTRAINT match_referees_fk3 FOREIGN KEY (assistant_referee_1) REFERENCES public.referees(referee_id);
@@ -342,38 +289,25 @@ ALTER TABLE ONLY public.match_referees
     ADD CONSTRAINT match_referees_fk4 FOREIGN KEY (assistant_referee_2) REFERENCES public.referees(referee_id);
 
 
---
--- Name: match_referees match_referees_fk5; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public.match_referees
     ADD CONSTRAINT match_referees_fk5 FOREIGN KEY (fourth_referee) REFERENCES public.referees(referee_id);
 
 
---
--- Name: matches matches_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public.matches
     ADD CONSTRAINT matches_fk0 FOREIGN KEY (host_team_id) REFERENCES public.teams(team_id);
 
 
---
--- Name: matches matches_fk1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public.matches
     ADD CONSTRAINT matches_fk1 FOREIGN KEY (guest_team_id) REFERENCES public.teams(team_id);
 
 
---
--- Name: players players_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
+
 
 ALTER TABLE ONLY public.players
     ADD CONSTRAINT players_fk0 FOREIGN KEY (team_id) REFERENCES public.teams(team_id);
 
 
---
--- PostgreSQL database dump complete
---
+
